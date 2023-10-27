@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/utils/app_theme.dart';
-import 'package:movies_app/features/browse/view/browse_view.dart';
+import 'package:movies_app/features/movie_details/view/movie_details_view.dart';
 import 'package:movies_app/features/root/view/root_view.dart';
 
 void main() async {
@@ -30,6 +30,7 @@ class MoviesApp extends StatelessWidget {
           initialRoute: RootView.routeName,
           routes: {
             RootView.routeName: (context) => const RootView(),
+            MovieDetailsView.routeName: (context) => const MovieDetailsView(),
           },
         );
       },

@@ -19,8 +19,8 @@ class MoviePoster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var wishListCubit = BlocProvider.of<WatchlistCubit>(context, listen: true);
-
+    var watchListCubit = BlocProvider.of<WatchlistCubit>(context, listen: true);
+    var isWishListed = watchListCubit.moviesBox.keys.contains(movie.id);
     return SizedBox(
       height: height,
       child: Stack(
@@ -43,41 +43,39 @@ class MoviePoster extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                        child: Text(
-                      "Sorry, no image found.",
-                      textAlign: TextAlign.center,
-                      style:
-                          AppStyles.textStyle16.copyWith(color: Colors.black),
-                    )),
+                      child: Text(
+                        "Sorry, no image found.",
+                        textAlign: TextAlign.center,
+                        style:
+                            AppStyles.textStyle16.copyWith(color: Colors.black),
+                      ),
+                    ),
                   );
                 },
               ),
             ),
           ),
           Positioned(
-            top: 0,
-            left: 0,
-            child: InkWell(
-              onTap: () {
-                wishListCubit.toggleWatchList(movie.id!);
-              },
-              child: Container(
-                width: 32,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage(
-                      !wishListCubit.moveiIds.contains(movie.id!)
+              top: 0,
+              left: 0,
+              child: InkWell(
+                onTap: () {
+                  watchListCubit.toggleWatchList(movie.id!, movie);
+                },
+                child: Container(
+                  width: 32,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage(!isWishListed
                           ? "assets/icons/bookmark_add.png"
-                          : "assets/icons/bookmarked.png",
+                          : "assets/icons/bookmarked.png"),
                     ),
                   ),
                 ),
-              ),
-            ),
-          )
+              ))
         ],
       ),
     );

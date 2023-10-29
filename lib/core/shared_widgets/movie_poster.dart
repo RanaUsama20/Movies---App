@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/constants/api_constants.dart';
 import 'package:movies_app/core/utils/app_colors.dart';
 import 'package:movies_app/core/utils/app_styles.dart';
+import 'package:movies_app/cubits/watchlist_cubit/watchlist_cubit.dart';
 import 'package:movies_app/models/movie_details_model/movie_details_model.dart';
 
 class MoviePoster extends StatelessWidget {
@@ -17,6 +19,8 @@ class MoviePoster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var wishListCubit = BlocProvider.of<WatchlistCubit>(context, listen: true);
+
     return SizedBox(
       height: height,
       child: Stack(
@@ -54,22 +58,22 @@ class MoviePoster extends StatelessWidget {
             top: 0,
             left: 0,
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                wishListCubit.toggleWatchList(movie.id!);
+              },
               child: Container(
                 width: 32,
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage("assets/icons/bookmark_add.png")
-
-                      // AssetImage(
-                      //   movie.isWishListed == false
-                      //       ? "assets/icons/bookmark_add.png"
-                      //       : "assets/icons/bookmarked.png",
-                      // ),
-                      ),
+                    fit: BoxFit.cover,
+                    image: AssetImage(
+                      !wishListCubit.moveiIds.contains(movie.id!)
+                          ? "assets/icons/bookmark_add.png"
+                          : "assets/icons/bookmarked.png",
+                    ),
+                  ),
                 ),
               ),
             ),

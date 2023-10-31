@@ -46,14 +46,6 @@ class PopularMovieCarouselItem extends StatelessWidget {
               );
             },
           ),
-          // Positioned.fill(
-          //   child: Align(
-          //     alignment: Alignment.center,
-          //     child: Image.asset(
-          //       "assets/icons/play_icon.png",
-          //     ),
-          //   ),
-          // ),
           Positioned(
             // bottom: MediaQuery.of(context).size.height * 0.13 * -1,
             bottom: -20.h,
@@ -94,7 +86,8 @@ class PopularMovieCarouselItem extends StatelessWidget {
                             width: 5.w,
                           ),
                           Text(
-                            movie.voteAverage ?? "0",
+                            double.parse(movie.voteAverage ?? "0")
+                                .toStringAsFixed(1),
                             style: AppStyles.textStyle14,
                           ),
                           SizedBox(

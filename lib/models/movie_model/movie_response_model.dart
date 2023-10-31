@@ -1,7 +1,7 @@
 import 'package:movies_app/models/movie_details_model/movie_details_model.dart';
 
-class MoveiResponse {
-  MoveiResponse({
+class MovieResponse {
+  MovieResponse({
     this.page,
     this.results,
     this.totalPages,
@@ -11,7 +11,7 @@ class MoveiResponse {
     this.statusMessage,
   });
 
-  MoveiResponse.fromJson(dynamic json) {
+  MovieResponse.fromJson(dynamic json) {
     page = json['page'];
 
     if (json['results'] != null) {

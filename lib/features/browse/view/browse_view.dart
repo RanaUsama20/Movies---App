@@ -33,7 +33,9 @@ class BrowseView extends StatelessWidget {
                 return InkWell(
                     splashColor: AppColors.yellowColor.withOpacity(0.3),
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    onTap: () {},
+                    onTap: () {
+
+                    },
                     child: CustomGenreContainer(
                         genre: genreList[index], index: index));
               },

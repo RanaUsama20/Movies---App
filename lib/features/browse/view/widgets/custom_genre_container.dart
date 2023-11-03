@@ -6,7 +6,7 @@ import 'package:movies_app/models/genre_model/genre_model.dart';
 class CustomGenreContainer extends StatelessWidget {
   GenreDM genre;
   int index;
-  CustomGenreContainer({required this.genre, required this.index});
+  CustomGenreContainer({required this.index, required this.genre});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,9 +14,9 @@ class CustomGenreContainer extends StatelessWidget {
       width: 158.sw,
       height: 90.sh,
       decoration: BoxDecoration(
-          image: const DecorationImage(
+          image: DecorationImage(
               alignment: Alignment.center,
-              image: AssetImage("assets/images/category_image.png"),
+              image: AssetImage(genre.imagePath),
               filterQuality: FilterQuality.high,
               fit: BoxFit.fill,
               opacity: 0.63),

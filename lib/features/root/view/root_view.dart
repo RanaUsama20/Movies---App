@@ -16,11 +16,11 @@ class RootView extends StatefulWidget {
 
 class _RootViewState extends State<RootView> {
   int selectedIndex = 0;
-  List<Widget> screens =  [
-    HomeView(),
-    SearchView(),
+  List<Widget> screens = [
+    const HomeView(),
+    const SearchView(),
     BrowseView(),
-    WatchlistView(),
+    const WatchlistView(),
   ];
   @override
   Widget build(BuildContext context) {

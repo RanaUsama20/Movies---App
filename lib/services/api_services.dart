@@ -58,24 +58,34 @@ class ApiService {
     }
   }
 
-  static Future<MovieResponse> getRecommendedMovies() async{
-    Uri url = Uri.https(ApiConstants.baseUrl,ApiConstants.topRatedEndPoint,
-    {
+  static Future<MovieResponse> getRecommendedMovies() async {
+    Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.topRatedEndPoint, {
       "api_key": ApiConstants.apiKey,
     });
-     try{
-       var response = await http.get(url);
-       String bodyString = response.body;
-       var json = jsonDecode(bodyString);
-       return MovieResponse.fromJson(json);
-     }
-     catch(e){
+    try {
+      var response = await http.get(url);
+      String bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      return MovieResponse.fromJson(json);
+    } catch (e) {
       rethrow;
-     }
+    }
+  }
 
-
-
-
-
+  static Future<MovieResponse> getMoviesBySearchQuery(
+      String searchQuery, int page) async {
+    try {
+      Uri url = Uri.parse(
+          "https://${ApiConstants.baseUrl}${ApiConstants.searchEndpoint}?query=$searchQuery&api_key=${ApiConstants.apiKey}&page=$page");
+      var response = await http.get(url);
+      print(url);
+      Map<String, dynamic> jsonData = jsonDecode(response.body);
+      var responseData = MovieResponse.fromJson(jsonData);
+      return responseData;
+    } on SocketException catch (e) {
+      rethrow;
+    } on Exception catch (e) {
+      throw e;
+    }
   }
 }
